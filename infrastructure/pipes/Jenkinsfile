@@ -9,14 +9,19 @@ pipeline {
                 sh 'docker images'
             }
         }
-        stage('Docker Pull') {
+        stage('Docker Tag') {
             steps {
-                sh 'docker pull nginx:latest'
+                sh 'docker tag nginx:latest yakirbartech/devops-e2e:nginx'
             }
         }
         stage('List Docker Images') {
             steps {
                 sh 'docker images'
+            }
+        }
+        stage('Docker Push') {
+            steps {
+                sh 'docker push yakirbartech/devops-e2e:nginx'
             }
         }
     }
