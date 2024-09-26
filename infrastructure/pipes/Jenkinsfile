@@ -14,7 +14,7 @@ pipeline {
                 sh 'docker pull nginx:latest'
             }
         }
-        stage('Docker Images') {
+        stage('List Docker Images') {
             steps {
                 sh 'docker images'
             }
