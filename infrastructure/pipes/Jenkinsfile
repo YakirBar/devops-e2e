@@ -1,11 +1,5 @@
 pipeline {
-    agent {
-        label 'inbound-agent'
-    }
-
-    environment {
-        DOCKERHUB_CREDENTIALS = credentials('DockerHub Personal Access Token')
-    }
+    agent any
 
     stages {
         stage('Docker Images') {
@@ -13,19 +7,19 @@ pipeline {
                 sh 'docker images'
             }
         }
-        stage('Docker Login') {
+        stage('Path') {
             steps {
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                sh 'pwd'
             }
         }
-        stage('Docker Push') {
+        stage('create txt file') {
             steps {
-                sh 'docker push yakirbartech/devops-e2e:nginx' 
+                sh 'touch yakir.txt'
             }
         }
-        stage('Docker Logout') {
+        stage('filled txt file') {
             steps {
-                sh 'docker logout'
+                sh 'echo "Trigger by github" > ./yakir.txt'
             }
         }
     }
