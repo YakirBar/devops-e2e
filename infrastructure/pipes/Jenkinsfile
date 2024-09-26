@@ -7,5 +7,20 @@ pipeline {
                 echo 'Hello World'
             }
         }
+        stage('Path') {
+            steps {
+                sh 'pwd'
+            }
+        }
+        stage('create txt file') {
+            steps {
+                sh 'touch yakir.txt'
+            }
+        }
+        stage('filled txt file') {
+            steps {
+                sh 'echo "Trigger by github" > ./yakir.txt'
+            }
+        }
     }
 }
