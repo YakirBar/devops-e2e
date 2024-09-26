@@ -1,25 +1,22 @@
 pipeline {
-    agent any
+    agent {
+        label 'inbound-agent'
+    }
 
     stages {
-        stage('Hello') {
+        stage('Docker Images') {
             steps {
-                echo 'Hello World'
+                sh 'docker images'
             }
         }
-        stage('Path') {
+        stage('Docker Pull') {
             steps {
-                sh 'pwd'
+                sh 'docker pull nginx:latest'
             }
         }
-        stage('create txt file') {
+        stage('Docker Images') {
             steps {
-                sh 'touch yakir.txt'
-            }
-        }
-        stage('filled txt file') {
-            steps {
-                sh 'echo "Trigger by github" > ./yakir.txt'
+                sh 'docker images'
             }
         }
     }
