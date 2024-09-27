@@ -26,7 +26,7 @@ pipeline {
         stage('Run Selenium Script') {
             steps {
                 // Navigate to the directory containing your script
-                dir('/home/jenkins/workspace/selenium/infrastructure/pipes') { 
+                dir('infrastructure/pipes') { 
                     // Execute the Python script
                     sh 'google_check.py'
                 }
