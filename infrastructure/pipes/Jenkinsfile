@@ -8,15 +8,15 @@ pipeline {
     // }
 
     stages {
-        // stage('Run Selenium Tests') {
-        //     steps {
-        //         script {
-        //             docker.image('selenium/standalone-chrome').inside {
-        //                 sh 'python3 path/to/your/selenium_test.py'
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Run Selenium Tests') {
+            steps {
+                script {
+                    docker.image('selenium/standalone-chrome').inside {
+                        sh './selenium.py'
+                    }
+                }
+            }
+        }
         stage('Hello') {
             steps {
                 echo 'Hello World'
