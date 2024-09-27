@@ -17,6 +17,7 @@ pipeline {
             steps {
                 script {
                     docker.image('selenium/standalone-chrome').inside {
+                        sh 'chmod +x /home/jenkins/workspace/selenium/infrastructure/pipes/google_check.py'
                         sh '/home/jenkins/workspace/selenium/infrastructure/pipes/google_check.py'
                     }
                 }
