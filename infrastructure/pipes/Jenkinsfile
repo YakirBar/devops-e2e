@@ -13,15 +13,15 @@ pipeline {
                 sh 'docker -v'
             }
         }
-        // stage('Run Selenium Tests') {
-        //     steps {
-        //         script {
-        //             docker.image('selenium/standalone-chrome').inside {
-        //                 sh './selenium.py'
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Run Selenium Tests') {
+            steps {
+                script {
+                    docker.image('selenium/standalone-chrome').inside {
+                        sh './google_check.py'
+                    }
+                }
+            }
+        }
         stage('Hello') {
             steps {
                 echo 'Hello World'
