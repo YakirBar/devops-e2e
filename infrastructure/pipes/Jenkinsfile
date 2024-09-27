@@ -3,30 +3,44 @@ pipeline {
         label 'inbound-agent'
     }
 
-    environment {
-        DOCKERHUB_CREDENTIALS = credentials('DockerHub Personal Access Token')
-    }
+    // environment {
+    //     DOCKERHUB_CREDENTIALS = credentials('DockerHub Personal Access Token')
+    // }
 
     stages {
-        stage('Docker Images') {
+        // stage('Run Selenium Tests') {
+        //     steps {
+        //         script {
+        //             docker.image('selenium/standalone-chrome').inside {
+        //                 sh 'python3 path/to/your/selenium_test.py'
+        //             }
+        //         }
+        //     }
+        // }
+        stage('Hello') {
             steps {
-                sh 'docker images'
+                echo 'Hello World'
             }
         }
-        stage('Docker Login') {
-            steps {
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-            }
-        }
-        stage('Docker Push') {
-            steps {
-                sh 'docker push yakirbartech/devops-e2e:nginx' 
-            }
-        }
-        stage('Docker Logout') {
-            steps {
-                sh 'docker logout'
-            }
-        }
+        // stage('Docker Images') {
+        //     steps {
+        //         sh 'docker images'
+        //     }
+        // }
+        // stage('Docker Login') {
+        //     steps {
+        //         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+        //     }
+        // }
+        // stage('Docker Push') {
+        //     steps {
+        //         sh 'docker push yakirbartech/devops-e2e:nginx' 
+        //     }
+        // }
+        // stage('Docker Logout') {
+        //     steps {
+        //         sh 'docker logout'
+        //     }
+        // }
     }
 }
