@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                     docker.image('selenium/standalone-chrome').inside {
-                        sh './google_check.py'
+                        sh './infrastructure/pipes/google_check.py'
                     }
                 }
             }
