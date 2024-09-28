@@ -46,4 +46,4 @@ services:
       JENKINS_WEB_SOCKET: "true"
       JENKINS_URL: "http://jenkins:8080"
       JENKINS_AGENT_NAME: "inbound-agent"
-      JENKINS_SECRET: "763aeeab6be5f82fd87f84cc0a0fe0cc67108a94664c0a2fa6004c19877478a4"
+      JENKINS_SECRET: "a7218944d5e690b2b537530c0c47ebb8035a7aa3bce92b79faf657cbb501079e"

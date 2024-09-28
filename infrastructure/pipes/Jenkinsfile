@@ -3,59 +3,11 @@ pipeline {
         label 'inbound-agent'
     }
 
-    // environment {
-    //     DOCKERHUB_CREDENTIALS = credentials('DockerHub Personal Access Token')
-    // }
-
     stages {
-        stage('Docker V') {
-            steps {
-                sh 'docker -v'
-            }
-        }
-        // stage('Run Selenium Tests') {
-        //     steps {
-        //         script {
-        //             docker.image('selenium/standalone-chrome').inside {
-        //                 sh 'chmod +x /home/jenkins/workspace/selenium/infrastructure/pipes/google_check.py'
-        //                 sh '/home/jenkins/workspace/selenium/infrastructure/pipes/google_check.py'
-        //             }
-        //         }
-        //     }
-        // }
-        stage('Run Selenium Script') {
-            steps {
-                // Navigate to the directory containing your script
-                dir('infrastructure/pipes') { 
-                    // Execute the Python script
-                    sh 'google_check.py'
-                }
-            }
-        }
         stage('Hello') {
             steps {
                 echo 'Hello World'
             }
         }
-        // stage('Docker Images') {
-        //     steps {
-        //         sh 'docker images'
-        //     }
-        // }
-        // stage('Docker Login') {
-        //     steps {
-        //         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-        //     }
-        // }
-        // stage('Docker Push') {
-        //     steps {
-        //         sh 'docker push yakirbartech/devops-e2e:nginx' 
-        //     }
-        // }
-        // stage('Docker Logout') {
-        //     steps {
-        //         sh 'docker logout'
-        //     }
-        // }
     }
 }
