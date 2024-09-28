@@ -14,7 +14,7 @@ pipeline {
                     echo "Output from script: ${output}"
 
                     // Check if the output contains "Google is alive!"
-                    if (output.contains("Google is alive!")) {
+                    if (output.contains("Google is alive! 123")) {
                         echo "Google is alive! Proceeding to the next stage."
                         // Set a flag to indicate the success
                         currentBuild.description = "Google is alive!"
