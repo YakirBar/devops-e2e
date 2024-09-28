@@ -6,14 +6,30 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'python3 ./infrastructure/scripts/google_check.py'
+                script {
+                    // Execute the Python script and capture the output
+                    def output = sh(script: 'python3 ./infrastructure/scripts/google_check.py', returnStdout: true).trim()
+                    
+                    // Print the output for debugging
+                    echo "Output from script: ${output}"
+
+                    // Check if the output contains "Google is alive!"
+                    if (output.contains("Google is alive!")) {
+                        echo "Google is alive! Proceeding to the next stage."
+                        // Set a flag to indicate the success
+                        currentBuild.description = "Google is alive!"
+                    } else {
+                        // Abort the pipeline
+                        error("Google is down or the page title has changed. Aborting the pipeline.")
+                    }
+                }
             }
         }
         stage('Hello') {
             when {
                 expression {
                     // Only run this stage if the previous stage was successful
-                    return currentBuild.description == "Google is alive! 1"
+                    return currentBuild.description == "Google is alive!"
                 }
             }
             steps {
