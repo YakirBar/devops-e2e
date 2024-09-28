@@ -13,7 +13,7 @@ pipeline {
             when {
                 expression {
                     // Only run this stage if the previous stage was successful
-                    return currentBuild.description == "Google is alive!"
+                    return currentBuild.description == "Google is alive! 1"
                 }
             }
             steps {
