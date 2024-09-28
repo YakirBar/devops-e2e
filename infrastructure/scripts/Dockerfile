@@ -1,26 +1,14 @@
-# Use the slim version of Python 3.8
+# Use the official Python image as a base image
 FROM python:3.8-slim
 
-# Install system dependencies
-RUN apt-get update -o Dpkg::Options::="--force-confold" && \
-    apt-get install -y --no-install-recommends \
-    wget \
-    gnupg \
-    libxi6 \
-    libgconf-2-4 && \
-    rm -rf /var/lib/apt/lists/*
-
-# Upgrade pip
-RUN pip install --no-cache-dir --upgrade pip
-
-# Install Selenium
-RUN pip install --no-cache-dir selenium
-
-# Copy your Python script
-COPY google_check.py /app/google_check.py
+# Install required packages
+RUN pip install selenium
 
 # Set the working directory
 WORKDIR /app
 
-# Command to run your script
+# Copy your Selenium WebDriver script into the container
+COPY google_check.py .
+
+# Define the command to execute your script
 CMD ["python", "google_check.py"]
