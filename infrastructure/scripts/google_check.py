@@ -8,7 +8,7 @@ chrome_options = Options()
 chrome_options.add_argument("--headless")  # Runs Chrome in headless mode (without GUI)
 
 # Specify the path to the ChromeDriver (update the path accordingly)
-service = Service("./chromedriver-win64/chromedriver.exe")
+service = Service("/home/jenkins/workspace/selenium/infrastructure/scripts/chromedriver-win64/chromedriver.exe")
 
 # Initialize the Chrome WebDriver
 driver = webdriver.Chrome(service=service, options=chrome_options)
