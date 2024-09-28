@@ -9,7 +9,7 @@ chrome_options.add_argument("--headless")  # Runs Chrome in headless mode (witho
 chrome_options.add_argument("--no-sandbox")  # Required for CI/CD environments
 
 # Specify the path to the ChromeDriver (update the path accordingly)
-service = Service("/home/jenkins/workspace/selenium/infrastructure/scripts/chromedriver-win64/chromedriver.exe")
+service = Service("/usr/bin/chromedriver")
 
 # Initialize the Chrome WebDriver
 driver = webdriver.Chrome(service=service, options=chrome_options)
