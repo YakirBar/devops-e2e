@@ -8,6 +8,6 @@ services:
       - 4444:4444
 
   google-check:
-    image: pyscript:0.1
+    image: yakirbartech/devops-e2e:selenium
     container_name: GoogleCheck
 
