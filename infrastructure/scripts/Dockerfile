@@ -2,12 +2,13 @@
 FROM python:3.8-slim
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get update -o Dpkg::Options::="--force-confold" && \
+    apt-get install -y --no-install-recommends \
     wget \
     gnupg \
     libxi6 \
-    libgconf-2-4 \
-    && rm -rf /var/lib/apt/lists/*
+    libgconf-2-4 && \
+    rm -rf /var/lib/apt/lists/*
 
 # Upgrade pip
 RUN pip install --no-cache-dir --upgrade pip
