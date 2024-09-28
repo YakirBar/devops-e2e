@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Hello') {
             steps {
-                echo 'Hello World'
+                sh 'python3 ./infrastructure/scripts/google_check.py'
             }
         }
     }

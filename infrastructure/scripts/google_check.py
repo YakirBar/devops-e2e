@@ -9,6 +9,7 @@ chrome_options.add_argument("--headless")  # Runs Chrome in headless mode (witho
 chrome_options.add_argument("--no-sandbox")  # Required for CI/CD environments
 
 # Specify the path to the ChromeDriver (update the path accordingly)
+# service = Service("./chromedriver-win64/chromedriver.exe")
 service = Service("/usr/bin/chromedriver")
 
 # Initialize the Chrome WebDriver
