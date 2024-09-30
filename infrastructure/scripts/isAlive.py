@@ -12,7 +12,7 @@ service = Service("/usr/bin/chromedriver")
 driver = webdriver.Chrome(service=service, options=chrome_options)
 
 try:
-    driver.get("https://www.fabecook.com")
+    driver.get("https://www.google.com")
 
     if "Google" in driver.title:
         print("Google is alive!")

@@ -3,6 +3,10 @@ pipeline {
         label 'inbound-agent'
     }
 
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('DockerHub Personal Access Token')
+    }
+
     stages {
         stage('Test') {
             steps {
@@ -25,7 +29,7 @@ pipeline {
                 }
             }
         }
-        stage('Hello') {
+        stage('Build & Tag Image') {
             when {
                 expression {
                     // Only run this stage if the previous stage was successful
@@ -33,7 +37,10 @@ pipeline {
                 }
             }
             steps {
-                echo 'Hello World'
+                sh 'docker images'
+                sh 'cd ./application'
+                sh 'docker build -t example:0.1'
+                sh 'docker images'
             }
         }
     }
