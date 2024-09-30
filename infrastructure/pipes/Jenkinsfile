@@ -4,14 +4,10 @@ pipeline {
     }
 
     stages {
+        // Stage that check selenium script isAlive.py
         stage('Hello') {
             steps {
                 echo 'Hello World'
-            }
-        }
-        stage('Docker Version') {
-            steps {
-                sh 'docker -v'
             }
         }
     }
