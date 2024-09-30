@@ -1,10 +1,17 @@
 pipeline {
-    agent any
+    agent {
+        label 'inbound-agent'
+    }
 
     stages {
         stage('Hello') {
             steps {
                 echo 'Hello World'
+            }
+        }
+        stage('Docker Version') {
+            steps {
+                sh 'docker -v'
             }
         }
     }
