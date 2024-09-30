@@ -38,7 +38,7 @@ pipeline {
             }
             steps {
                 sh 'docker images'
-                sh 'docker build -t example:0.1 -f "./application" .'
+                sh 'docker build -t example:0.1 -f "/home/jenkins/workspace/agent pipeline/application" .'
                 sh 'docker images'
             }
         }
