@@ -37,9 +37,10 @@ pipeline {
                 }
             }
             steps {
-                sh 'docker images'
-                sh 'docker build -t example:0.1 -f "./application/Dockerfile" .'
-                sh 'docker images'
+                sh """
+                    cd application
+                    docker build -t example:0.1 .
+                """
             }
         }
     }
