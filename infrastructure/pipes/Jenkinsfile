@@ -39,7 +39,7 @@ pipeline {
             steps {
                 sh 'docker images'
                 sh 'cd ./application'
-                sh 'docker build -t example:0.1'
+                sh 'docker build -t example:0.1 .'
                 sh 'docker images'
             }
         }
