@@ -29,18 +29,49 @@ pipeline {
                 }
             }
         }
-        stage('Build & Tag Image') {
+        stage('Build Image') {
             when {
                 expression {
-                    // Only run this stage if the previous stage was successful
                     return currentBuild.description == "Google is alive!"
                 }
             }
             steps {
                 sh """
                     cd application
-                    docker build -t example:0.1 .
+                    docker build -t yakirbartech/devops-e2e:0.1 .
                 """
+            }
+        }
+        stage('Login Docker') {
+            when {
+                expression {
+                    return currentBuild.description == "Google is alive!"
+                }
+            }
+            steps {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            }
+        }
+        stage('Push Image To DockerHub') {
+            when {
+                expression {
+                    return currentBuild.description == "Google is alive!"
+                }
+            }
+            steps {
+                sh """
+                    docker push yakirbartech/devops-e2e:0.1
+                """
+            }
+        }
+        stage('Logout Docker') {
+            when {
+                expression {
+                    return currentBuild.description == "Google is alive!"
+                }
+            }
+            steps {
+                sh 'docker logout'
             }
         }
     }
