@@ -36,14 +36,14 @@ services:
     ports:
       - 4002:8080
   
-  inbound-agent:
-    container_name: InboundAgent
-    image: jforge/jenkins-inbound-agent:latest
-    privileged: true
-    environment:
-      DIND: "true"
-      TINI_SUBREAPER: "true"
-      JENKINS_WEB_SOCKET: "true"
-      JENKINS_URL: "http://jenkins:8080"
-      JENKINS_AGENT_NAME: "inbound-agent"
-      JENKINS_SECRET: "e2ca1091e6bbb791ca0caece89041cab42aa7bf4362f81877c274ffa7fdcf21e"
+  # inbound-agent:
+  #   container_name: InboundAgent
+  #   image: jforge/jenkins-inbound-agent:latest
+  #   privileged: true
+  #   environment:
+  #     DIND: "true"
+  #     TINI_SUBREAPER: "true"
+  #     JENKINS_WEB_SOCKET: "true"
+  #     JENKINS_URL: "http://jenkins:8080"
+  #     JENKINS_AGENT_NAME: "inbound-agent"
+  #     JENKINS_SECRET: "e2ca1091e6bbb791ca0caece89041cab42aa7bf4362f81877c274ffa7fdcf21e"
