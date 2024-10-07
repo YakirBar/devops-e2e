@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: school-deployment
+  namespace: school
+  labels:
+    nginx: my-nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      nginx: my-nginx
+  template:
+    metadata:
+      labels:
+        nginx: my-nginx
+    spec:
+      containers:
+      - name: my-container
+        image: nginx:latest
+        ports:
+        - containerPort: 80
