@@ -31,7 +31,19 @@ services:
       ME_CONFIG_MONGODB_URL: mongodb://root:secret@mongo:27017/
 
   jenkins:
-    image: jenkins/jenkins:lts
     container_name: JenkinsCI
+    image: jenkins/jenkins:lts
     ports:
       - 4002:8080
+  
+  inbound-agent:
+    container_name: InboundAgent
+    image: jforge/jenkins-inbound-agent:latest
+    privileged: true
+    environment:
+      DIND: "true"
+      TINI_SUBREAPER: "true"
+      JENKINS_WEB_SOCKET: "true"
+      JENKINS_URL: "http://jenkins:8080"
+      JENKINS_AGENT_NAME: "inbound-agent"
+      JENKINS_SECRET: "723e1764eb7ad663f90630c10271cac19a07477b329156028a58acf6267c3ad3"

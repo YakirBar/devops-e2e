@@ -1,11 +1,96 @@
 pipeline {
-    agent any
+    agent {
+        label 'inbound-agent'
+    }
+
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('DockerHub Personal Access Token')
+        DOCKER_IMAGE = "yakirbartech/devops-e2e:${env.BUILD_NUMBER}"
+        GOOGLE_ALIVE = false
+    }
 
     stages {
-        stage('Hello') {
+        stage('Test') {
             steps {
-                echo 'Hello World'
+                script {
+                    // Execute the Python script and capture the output
+                    def output = sh(script: 'python3 ./infrastructure/scripts/isAlive.py', returnStdout: true).trim()
+
+                    // Print the output for debugging
+                    echo "Output from script: ${output}"
+
+                    // Check if the output contains "Google is alive!"
+                    if (output.contains("Google is alive!")) {
+                        echo "Google is alive! Proceeding to the next stage."
+                        // Set the flag to true
+                        GOOGLE_ALIVE = true
+                    } else {
+                        // Abort the pipeline
+                        error("Google is down or the page title has changed. Aborting the pipeline.")
+                    }
+                }
             }
+        }
+
+        stage('Build Image') {
+            when {
+                expression {
+                    return GOOGLE_ALIVE
+                }
+            }
+            steps {
+                sh """
+                    cd application
+                    docker build -t ${DOCKER_IMAGE} .
+                """
+            }
+        }
+
+        stage('Login Docker') {
+            when {
+                expression {
+                    return GOOGLE_ALIVE
+                }
+            }
+            steps {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            }
+        }
+
+        stage('Push Image To DockerHub') {
+            when {
+                expression {
+                    return GOOGLE_ALIVE
+                }
+            }
+            steps {
+                sh """
+                    docker push ${DOCKER_IMAGE}
+                """
+            }
+        }
+
+        stage('Logout Docker') {
+            when {
+                expression {
+                    return GOOGLE_ALIVE
+                }
+            }
+            steps {
+                sh 'docker logout'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo "Pipeline completed. Cleaning up..."
+        }
+        failure {
+            echo "Pipeline failed."
+        }
+        success {
+            echo "Pipeline succeeded!"
         }
     }
 }
